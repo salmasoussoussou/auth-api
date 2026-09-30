@@ -4,7 +4,9 @@ use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
 // Routes publiques (sans token)
-Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/register', [AuthController::class, 'register'])
+    ->middleware('throttle:5,1');   // 5 tentatives maximum par minute
 Route::post('/login', [AuthController::class, 'login'])
     ->middleware('throttle:5,1');   // 5 tentatives maximum par minute
 

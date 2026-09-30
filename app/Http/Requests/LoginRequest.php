@@ -2,14 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
@@ -18,8 +14,18 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => 'required|email|max:255',
             'password' => 'required|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => "Le champ email est vide : veuillez saisir votre email.",
+            'email.email' => "Le format de l'email est invalide (exemple : nom@domaine.com).",
+            'email.max' => "L'email ne doit pas dépasser 255 caractères.",
+            'password.required' => 'Le champ mot de passe est vide : veuillez saisir votre mot de passe.',
         ];
     }
 }

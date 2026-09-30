@@ -13,7 +13,8 @@ class AuthTest extends TestCase
     public function test_inscription_reussie(): void
     {
         $response = $this->postJson('/api/register', [
-            'name' => 'Test',
+'first_name' => 'Test',
+'last_name' => 'User',
             'email' => 'test@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',
